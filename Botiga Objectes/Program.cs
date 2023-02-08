@@ -17,7 +17,7 @@ namespace Botiga_Objectes
             Producte mesa = new Producte("nevera", 75, 8);
             Botiga botiga = new Botiga(20);
             Cistella cistella = new Cistella(20,2000);
-            botiga.Nom = "Mercadona";
+            botiga.nom_botiga = "Mercadona";
             botiga.AfegirProducte(taula);
             botiga.AfegirProducte(cadira);
             botiga.AfegirProducte(mesa);
@@ -54,7 +54,7 @@ namespace Botiga_Objectes
                                     Console.Clear();
                                     Console.WriteLine();
                                     Console.WriteLine("Productes disponibles: ");
-                                    Console.WriteLine(botiga.BotigaText());
+                                    Console.WriteLine(botiga.ToString());
                                     Console.WriteLine("Quin producte vols comprar?");
                                     string producteComprar = Console.ReadLine();
                                     Producte compra = botiga.TornarProducte(producteComprar);

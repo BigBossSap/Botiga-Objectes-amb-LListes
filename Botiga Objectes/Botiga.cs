@@ -53,32 +53,22 @@ namespace Botiga_Objectes
 
         }
 
-       
-
-        //public Producte TornarProducte(string nom)
-        //{
-        //    int cont = 0;
-        //    int pos = 0;
-        //    for (int i = 0; i < ProductesBotiga.Length; i++)
-        //    {
-        //        if (ProductesBotiga[i] == null)
-        //        {
-
-        //        }
 
 
-        //        else if (ProductesBotiga[i].Nom == nom)
-        //        {
-        //            pos = cont;
-        //            cont++;
-        //        }
+        public Producte TornarProducte(string nom)
+        {
 
-        //        cont++;
+            Producte producte = null;
+
+            producte= productes.Find(a => a.Nom.Equals(nom));
 
 
-        //    }
-        //    return ProductesBotiga[pos];
-        //}
+
+
+
+
+            return producte;
+        }
 
         //ModificarProducte(Producte producte, String nou_nom, double nou_preu) : Mètode
         //    públic.Donat un producte hem de buscar-lo a la taula de productes per saber
