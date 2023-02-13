@@ -20,11 +20,10 @@ namespace Botiga_Objectes
             Moneder = diners;
             this.nombre_productes = nombre_productes;
         }
-        //       ComprarProducte(Producte producte, int quantitat) : Afegeix un producte
-        //       tantes vegades com indiqui quantitat.
+       
         public bool ComprarProducte(Producte producte, int quantitat)
         {
-            // 0 = no hi ha diners, 1=afegit, -1 No afegit per espai.
+            
             // Sense poder accedir a la llista de prestatge ni al metode buscar producte, no se com comprovar 
             // si el producte existeix.
             bool resultat = false;
@@ -34,7 +33,8 @@ namespace Botiga_Objectes
                 {
                     for (int i = 0; i < quantitat; i++)
                     {
-                        Productes.Add(producte);
+                        Productes.Add(new Producte(producte.Nom,producte.Preu_sense_iva,producte.Iva));
+                        // mirar lo de la referencia  
                         resultat = true;
                     }
                 }
@@ -52,11 +52,7 @@ namespace Botiga_Objectes
             }
             return costTotal;
         }
-        //ToString() : retorna de forma amigable un string amb tots els 
-        //    productes.Retorna també el total amb iva inclòs.
-        //    Recordar que no es pot fer servir el Console.Write 
-        //    dintre de l’objecte, el Console.Write s’ha 
-        //        de fer servir des del main().
+      
         public string ToString()
         {
             string cistellaText = "";
