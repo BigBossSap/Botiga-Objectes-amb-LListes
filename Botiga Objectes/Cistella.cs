@@ -13,19 +13,21 @@ namespace Botiga_Objectes
 
         public string Data { get; set; }
 
-        public Producte[] ProductesCistella;
+        private List<Producte> Productes;
 
-        private int NelementsCistella;
+        private int nombre_productes;
 
         public double Moneder;
 
 
-        public Cistella( int productes, double diners)
+        public Cistella( int nombre_productes, double diners)
         {
-            
+
+
+            Productes = new List<Producte>();
             Moneder = diners;
-            ProductesCistella = new Producte[productes];
-            NelementsCistella = 0;
+            this.nombre_productes = nombre_productes;
+            
 
         }
 
@@ -33,66 +35,48 @@ namespace Botiga_Objectes
         //       tantes vegades com indiqui quantitat.
 
 
-        public int ComprarProducte(Producte producte, int quantitat)
+        public bool ComprarProducte(Producte producte, int quantitat)
         {
             // 0 = no hi ha diners, 1=afegit, -1 No afegit per espai.
-            int resultat = -1;
-            
-            bool trobat = false;
-            int posBuscar = 0;
-            
+            // Sense poder accedir a la llista de prestatge ni al metode buscar producte, no se com comprovar 
+            // si el producte existeix.
+            bool resultat = false;
 
-            if (Moneder - producte.PreuProducte() * quantitat >= 0 && quantitat<ProductesCistella.Length)
+            if (Moneder - producte.PreuProducte() * quantitat >= 0)
             {
-                for (int j = 0; j < quantitat && posBuscar < ProductesCistella.Length; j++)
+
+                if (!(Productes.Count + quantitat > nombre_productes))
                 {
-                    bool fi = false;
-                    while (posBuscar < ProductesCistella.Length && !fi)
+                    for (int i = 0; i < quantitat; i++)
                     {
-                        if (ProductesCistella[posBuscar] == null)
-                        {
-                            Producte p = new Producte();
-                            p.Nom = producte.Nom;
-                            p.Preu_sense_iva = producte.Preu_sense_iva;
-                            p.Iva = producte.Iva;
-
-                            ProductesCistella[posBuscar] = p;
-                            NelementsCistella++;
-                            resultat = 1;
-                            fi = true;
-                            
-                        }
-                        else
-                        {
-                            posBuscar++;
-                            if (posBuscar >= ProductesCistella.Length)
-                            {
-                                resultat = -1;
-                                fi = true;
-                            }
-                        }
+                        Productes.Add(producte);
+                        resultat = true;
                     }
-                }
-            }
-            else
-                resultat = 0;
 
-            Moneder = Math.Round((Moneder - producte.PreuProducte() * quantitat), 2);
+                }
+
+            }
+
+            
+            
+           
+        
             return resultat;
 
 
         }
 
-        public double cistellaCostTotal()
+        public double CostTotal()
         {
             double costTotal=0;
 
-            for (int i = 0; i < NelementsCistella; i++) {
+            foreach(Producte producte in Productes)
+            {
 
-                costTotal += ProductesCistella[i].Preu_sense_iva + (ProductesCistella[i].Preu_sense_iva * ProductesCistella[i].Iva/100);
-                
+                costTotal += producte.PreuProducte();
 
-                    }
+
+            }
 
 
             return costTotal;
@@ -107,23 +91,23 @@ namespace Botiga_Objectes
         //    dintre de l’objecte, el Console.Write s’ha 
         //        de fer servir des del main().
 
-        public string CistellaText()
+        public string ToString()
         {
 
             string cistellaText = "";
 
-            for(int i=0; i< NelementsCistella; i++)
+            foreach(Producte p in Productes)
             {
 
-                cistellaText += new string(' ', Console.WindowWidth / 3) + $"Nom: <{ProductesCistella[i].Nom}>  \n";
-                cistellaText += new string(' ', Console.WindowWidth / 3) + $"Preu: {ProductesCistella[i].Preu_sense_iva}€ \n";
-                cistellaText += new string(' ', Console.WindowWidth / 3) + $"Iva:  {ProductesCistella[i].Iva}% \n";
+                cistellaText += new string(' ', Console.WindowWidth / 3) + $"Nom: <{p.Nom}>  \n";
+                cistellaText += new string(' ', Console.WindowWidth / 3) + $"Preu: {p.Preu_sense_iva}€ \n";
+                cistellaText += new string(' ', Console.WindowWidth / 3) + $"Iva:  {p.Iva}% \n";
 
 
                 
             }
 
-            cistellaText += $"Cost Total Iva Inclos: {cistellaCostTotal()}";
+            cistellaText += $"Cost Total Iva Inclos: {CostTotal()}";
 
             return cistellaText;
 

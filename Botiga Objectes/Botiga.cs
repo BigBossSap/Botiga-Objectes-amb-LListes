@@ -12,7 +12,7 @@ namespace Botiga_Objectes
 
         public string nom_botiga { get; set; }
 
-        private List<Producte> productes;
+        private List<Producte> prestatge;
 
         private int nombre_productes;
 
@@ -20,7 +20,7 @@ namespace Botiga_Objectes
 
         public Botiga(int num)
         {
-            productes = new List<Producte>();
+            prestatge = new List<Producte>();
             nombre_productes = 20;
 
 
@@ -32,9 +32,9 @@ namespace Botiga_Objectes
            
 
 
-            if (productes.Count() < nombre_productes)
+            if (prestatge.Count() < nombre_productes)
             {
-                productes.Add(Producte);
+                prestatge.Add(Producte);
                 afegit = true;
             }
           
@@ -46,7 +46,7 @@ namespace Botiga_Objectes
         private int BuscarProducte(Producte producte)
         {
             
-            int pos=productes.IndexOf(producte);
+            int pos=prestatge.IndexOf(producte);
 
             
             return pos;
@@ -60,7 +60,7 @@ namespace Botiga_Objectes
 
             Producte producte = null;
 
-            producte= productes.Find(a => a.Nom.Equals(nom));
+            producte= prestatge.Find(a => a.Nom.Equals(nom));
 
 
 
@@ -80,12 +80,14 @@ namespace Botiga_Objectes
             bool modificat = false;
 
             int pos = BuscarProducte(producte);
-                
-                productes[pos].Nom = nomNou;
-                productes[pos].Preu_sense_iva = preuNou;
-                productes[pos].Iva = ivaNou;
+
+            if (pos != -1)
+            {
+                prestatge[pos].Nom = nomNou;
+                prestatge[pos].Preu_sense_iva = preuNou;
+                prestatge[pos].Iva = ivaNou;
                 modificat = true;
-            
+            }
 
             return modificat;
 
@@ -119,7 +121,8 @@ namespace Botiga_Objectes
         {
             bool esborrat = false;
 
-            productes.Remove(producte);
+            if (prestatge.Remove(producte))
+                esborrat = true;
 
 
             return esborrat;
@@ -134,7 +137,7 @@ namespace Botiga_Objectes
             
             bool lliure = false;
 
-            if (productes.Count() < nombre_productes)
+            if (prestatge.Count() < nombre_productes)
                 lliure = true;
 
             
@@ -154,7 +157,7 @@ namespace Botiga_Objectes
         {
             string botigaText = "";
 
-            foreach(Producte prod in productes)
+            foreach(Producte prod in prestatge)
             {
 
                 botigaText += prod.Nom;
