@@ -33,8 +33,7 @@ namespace Botiga_Objectes
                 {
                     for (int i = 0; i < quantitat; i++)
                     {
-                        Productes.Add(new Producte(producte.Nom,producte.Preu_sense_iva,producte.Iva));
-                        // mirar lo de la referencia  
+                        Productes.Add(new Producte(producte.Nom,producte.Preu_sense_iva,producte.Iva));                        
                         resultat = true;
                     }
                 }
