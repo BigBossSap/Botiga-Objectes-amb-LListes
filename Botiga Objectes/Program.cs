@@ -99,8 +99,8 @@ namespace Botiga_Objectes
                                     break;
                                 case 2:
                                     
-                                    Console.WriteLine(cistella.CostTotal());
-                                    Console.WriteLine(cistella.Moneder);
+                                    Console.WriteLine($"Preu Total: {cistella.CostTotal()}");
+                                    Console.WriteLine($"Diners restants: {cistella.Moneder}");
                                     Console.WriteLine("Presiona qualsevol tecla pero continuar.");
                                     Console.ReadLine();
 
@@ -265,10 +265,10 @@ namespace Botiga_Objectes
                             //Error per superar capacitat de la cistella:
 
                             
-                            if (cistella2.ComprarProducte(producte1, 30))
+                            if (!(cistella2.ComprarProducte(producte1, 30)))
                             {
                                 Console.WriteLine("No s'han pogut afegir els productes. CORRECTE");
-                                nota_correccio++;
+                                nota_correccio+=2;
                             }
 
                             else
@@ -288,7 +288,7 @@ namespace Botiga_Objectes
 
                             
                             if (botiga2.ModificarProducte(producte1, "Pera", 5, 16))
-                                nota_correccio+=1;
+                                nota_correccio+=2;
                             else
                                 Console.WriteLine("No s'ha pogut cambiar el producte.");
 

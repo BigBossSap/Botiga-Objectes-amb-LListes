@@ -160,9 +160,9 @@ namespace Botiga_Objectes
             foreach(Producte prod in prestatge)
             {
 
-                botigaText += prod.Nom;
-                botigaText += prod.Preu_sense_iva;
-                botigaText += prod.Iva;
+                botigaText += $"Producte: {prod.Nom} \n";
+                botigaText += $"Preu: {prod.Preu_sense_iva} ";
+                botigaText += $"IVA: {prod.Iva}\n\n";
 
 
             }

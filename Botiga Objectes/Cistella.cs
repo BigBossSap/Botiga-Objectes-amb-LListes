@@ -57,9 +57,10 @@ namespace Botiga_Objectes
 
             }
 
-            
-            
-           
+
+
+            if (resultat)
+                Moneder-= producte.PreuProducte() * quantitat;
         
             return resultat;
 
